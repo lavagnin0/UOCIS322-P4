@@ -35,7 +35,7 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     else:
         offset = (200/34) + (200/32) + (200/30) + (control_dist_km - 600)/28
     time = brevet_start_time.shift(hours=offset)
-    if time.second > 30:
+    if time.second >= 30:
         return time.shift(minutes=1)
     return time
 
@@ -57,6 +57,6 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     else:
         offset = 40 + (control_dist_km - 600)/11.428
     time = brevet_start_time.shift(hours=offset)
-    if time.second > 30:
+    if time.second >= 30:
         return time.shift(minutes=1)
     return time
