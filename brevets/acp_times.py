@@ -27,14 +27,14 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
        This will be in the same time zone as the brevet start time.
     """
     if control_dist_km <= 200:
-        max_speed = 34
+        offset = control_dist_km/34
     elif control_dist_km <= 400:
-        max_speed = 32
+        offset = (200/34) + (control_dist_km - 200)/32
     elif control_dist_km <= 600:
-        max_speed = 30
+        offset = (200/34) + (200/32) + (control_dist_km - 400)/30
     else:
-        max_speed = 28
-    return brevet_start_time.shift(hours=control_dist_km/max_speed)
+        offset = (200/34) + (200/32) + (200/30) + (control_dist_km - 600)/28
+    return brevet_start_time.shift(hours=offset)
 
 
 def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
@@ -50,7 +50,7 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
        This will be in the same time zone as the brevet start time.
     """
     if control_dist_km <= 600:
-        min_speed = 15
+        offset = control_dist_km/15
     else:
-        min_speed = 11.428
-    return brevet_start_time.shift(hours=control_dist_km/min_speed)
+        offset = 40 + (control_dist_km - 600)/11.428
+    return brevet_start_time.shift(hours=offset)
