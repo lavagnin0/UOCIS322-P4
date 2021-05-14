@@ -52,7 +52,9 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
        A date object indicating the control close time.
        This will be in the same time zone as the brevet start time.
     """
-    if control_dist_km <= 600:
+    if control_dist_km < 60:
+        offset = 1 + control_dist_km/20
+    elif control_dist_km <= 600:
         offset = control_dist_km/15
     else:
         offset = 40 + (control_dist_km - 600)/11.428

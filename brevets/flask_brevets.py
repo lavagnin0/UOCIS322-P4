@@ -50,7 +50,7 @@ def _calc_times():
     Expects one URL-encoded argument, the number of miles.
     """
     app.logger.debug("Got a JSON request")
-    km = request.args.get('km', 999, type=float)
+    km = int(request.args.get('km', 999, type=float))
     start_time = arrow.get(request.args.get('start_time', type=str), 'YYYY-MM-DDTHH:mm')
     app.logger.debug("km={}".format(km))
     app.logger.debug("start time={}".format(start_time))
