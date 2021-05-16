@@ -1,6 +1,6 @@
 import nose
 import arrow
-import acp_times as acp_times
+from src import acp_times
 
 sample_time = arrow.get('01/01/2021 00:00:00', 'MM/DD/YYYY HH:mm:ss')
 
